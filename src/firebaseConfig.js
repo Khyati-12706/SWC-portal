@@ -3,14 +3,23 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
+// .env template:
+// REACT_APP_FIREBASE_API_KEY=your-api-key
+// REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
+// REACT_APP_FIREBASE_PROJECT_ID=your-project-id
+// REACT_APP_FIREBASE_STORAGE_BUCKET=your-storage-bucket
+// REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
+// REACT_APP_FIREBASE_APP_ID=your-app-id
+// REACT_APP_FIREBASE_MEASUREMENT_ID=your-measurement-id
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDsNyy0N8zA-muW_k5Fe5jUfbGGalXEb4k",
-  authDomain: "vit-swc-admin.firebaseapp.com",
-  projectId: "vit-swc-admin",
-  storageBucket: "vit-swc-admin.firebasestorage.app",
-  messagingSenderId: "684394450806",
-  appId: "1:684394450806:web:3cb309535b76ec16027457",
-  measurementId: "G-2174GVT6GH"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);

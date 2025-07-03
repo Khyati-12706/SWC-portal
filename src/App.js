@@ -270,28 +270,28 @@ function App() {
             <p style={{ margin: 0 }}><strong>Category:</strong> {clubs[selectedClub].category || 'Not assigned'}</p>
             <p style={{ margin: 0 }}><strong>President:</strong> {clubs[selectedClub].president || 'Not assigned'}</p>
             <p style={{ margin: 0 }}><strong>Faculty:</strong> {clubs[selectedClub].faculty || 'Not assigned'}</p>
-          </div>
+</div>
 
           {user.role === 'admin' && (
-            <div className="assign-section">
-              <div className="assign-group">
-                <input
-                  placeholder="Assign President"
+  <div className="assign-section">
+    <div className="assign-group">
+      <input
+        placeholder="Assign President"
                   value={newClubPresident}
                   onChange={(e) => setNewClubPresident(e.target.value)}
-                />
-                <button onClick={assignPresident}>Assign</button>
-              </div>
-              <div className="assign-group">
-                <input
-                  placeholder="Assign Faculty"
+      />
+      <button onClick={assignPresident}>Assign</button>
+    </div>
+    <div className="assign-group">
+      <input
+        placeholder="Assign Faculty"
                   value={newClubFaculty}
                   onChange={(e) => setNewClubFaculty(e.target.value)}
-                />
-                <button onClick={assignFaculty}>Assign</button>
-              </div>
-            </div>
-          )}
+      />
+      <button onClick={assignFaculty}>Assign</button>
+    </div>
+  </div>
+)}
 
           {(user.role === 'admin' || user.role === 'president') && (
             <>
@@ -306,16 +306,16 @@ function App() {
                   </li>
                 ))}
               </ul>
-              <div className="add-member-inline">
-                <input
-                  type="text"
-                  placeholder="New Member"
-                  className="new-member-inline-input"
+           <div className="add-member-inline">
+  <input
+    type="text"
+    placeholder="New Member"
+    className="new-member-inline-input"
                   value={newMemberName}
                   onChange={(e) => setNewMemberName(e.target.value)}
-                />
-                <button onClick={addMember}>Add Member</button>
-              </div>
+  />
+  <button onClick={addMember}>Add Member</button>
+</div>
             </>
           )}
 
@@ -463,12 +463,12 @@ function App() {
                 </div>
               ) : (
                 <div className="add-club-form">
-                  <input
-                    type="text"
-                    placeholder="New Club Name"
-                    value={newClubName}
-                    onChange={(e) => setNewClubName(e.target.value)}
-                  />
+              <input
+                type="text"
+                placeholder="New Club Name"
+                value={newClubName}
+                onChange={(e) => setNewClubName(e.target.value)}
+              />
                   <input
                     type="text"
                     placeholder="Description"
@@ -504,10 +504,10 @@ function App() {
                     </select>
                   </div>
                   <div style={{ marginTop: '0.7rem', display: 'flex', gap: '0.5rem' }}>
-                    <button onClick={handleAddClub}>➕ Add Club</button>
+              <button onClick={handleAddClub}>➕ Add Club</button>
                     <button onClick={() => setShowAddClubForm(false)} style={{ background: '#eee', color: '#333' }}>Cancel</button>
                   </div>
-                </div>
+            </div>
               )}
             </>
           )}
@@ -517,31 +517,31 @@ function App() {
                 You are not assigned as president to any club.
               </div>
             ) : (
-              <ul className="club-list">
+          <ul className="club-list">
                 {presidentClubs.map((club, index) => {
                   const realIndex = clubs.indexOf(club);
                   return (
-                    <li key={index} className="club-item">
-                      <div className="club-info">
+              <li key={index} className="club-item">
+                <div className="club-info">
                         <strong style={{ fontWeight: 'bold', fontSize: '1.4rem', display: 'block', marginBottom: '0.2rem' }}>{club.name}</strong>
                         <div style={{ fontSize: '0.95em', color: '#555', marginBottom: '0.2rem' }}>{club.description} | {club.category}</div>
                         <div className="club-buttons" style={{ display: 'flex', gap: '0.3rem', flexWrap: 'wrap' }}>
                           <button style={{ fontSize: '0.85em', padding: '2px 7px' }} onClick={() => handleClubSelect(realIndex)}>🔧 Manage</button>
                           <button style={{ fontSize: '0.85em', padding: '2px 7px' }} onClick={() => toggleViewMembers(realIndex)}>
                             {viewMembersIndex === realIndex ? '🙈 Hide Members' : '👁️ View Members'}
-                          </button>
-                        </div>
-                      </div>
+                    </button>
+                  </div>
+                </div>
                       {viewMembersIndex === realIndex && (
-                        <ul className="members-list">
-                          {club.members.length > 0 ? (
-                            club.members.map((m, i) => <li key={i}>👤 {m}</li>)
-                          ) : (
-                            <li>No members yet.</li>
-                          )}
-                        </ul>
-                      )}
-                    </li>
+                  <ul className="members-list">
+                    {club.members.length > 0 ? (
+                      club.members.map((m, i) => <li key={i}>👤 {m}</li>)
+                    ) : (
+                      <li>No members yet.</li>
+                    )}
+                  </ul>
+                )}
+              </li>
                   );
                 })}
               </ul>
@@ -570,7 +570,7 @@ function App() {
                     </li>
                   );
                 })}
-              </ul>
+          </ul>
             )
           )}
         </>
