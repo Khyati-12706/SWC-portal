@@ -67,7 +67,8 @@ function App() {
       return alert('Please fill all club details');
     }
     if (newClubPresident === newClubFaculty) return alert('President and Faculty cannot be the same');
-    const exists = clubs.some(club => club.name.toLowerCase() === newClubName.toLowerCase());
+  
+     const exists = clubs.some(club => (club.name || '').toLowerCase() === newClubName.toLowerCase());
     if (exists) return alert('Club already exists!');
     await addDoc(collection(db, 'clubs'), {
       name: newClubName.trim(),
