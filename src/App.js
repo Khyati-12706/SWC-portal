@@ -67,8 +67,7 @@ function App() {
       return alert('Please fill all club details');
     }
     if (newClubPresident === newClubFaculty) return alert('President and Faculty cannot be the same');
-  
-     const exists = clubs.some(club => (club.name || '').toLowerCase() === newClubName.toLowerCase());
+    const exists = clubs.some(club => (club.name || '').toLowerCase() === newClubName.toLowerCase());
     if (exists) return alert('Club already exists!');
     await addDoc(collection(db, 'clubs'), {
       name: newClubName.trim(),
@@ -181,34 +180,33 @@ function App() {
 
   const handleCancelEdit = () => setEditClubIndex(null);
 
+  // Filtered clubs by category
+  const filteredClubs = clubs.filter(club => {
+    const term = searchTerm.toLowerCase();
+    const categoryMatch = categoryFilter === 'All' || ((club.category || '').toLowerCase() === categoryFilter.toLowerCase());
+    return (
+      (club.name && club.name.toLowerCase().includes(term)) ||
+      (club.description && club.description.toLowerCase().includes(term)) ||
+      (club.category && club.category.toLowerCase().includes(term))
+    ) && categoryMatch;
+  });
+
   // Dashboard summary for all roles
-  const totalClubs = clubs.length;
+  const totalClubs = filteredClubs.length;
   const totalMembers = clubs.reduce((sum, club) => sum + (club.members ? club.members.length : 0), 0);
   const categoryCounts = clubs.reduce((acc, club) => {
     acc[club.category] = (acc[club.category] || 0) + 1;
     return acc;
   }, {});
 
-  // Filtered clubs by category
-  const filteredClubs = clubs.filter(club => {
-    const term = searchTerm.toLowerCase();
-    const categoryMatch = categoryFilter === 'All' || (club.category && club.category.toLowerCase() === categoryFilter.toLowerCase());
-    return (
-      (club.name.toLowerCase().includes(term) ||
-        (club.description && club.description.toLowerCase().includes(term)) ||
-        (club.category && club.category.toLowerCase().includes(term))) &&
-      categoryMatch
-    );
-  });
-
   // Filtered clubs for president (case-insensitive)
   const presidentClubs = user && user.role === 'president'
-    ? clubs.filter(club => club.president && club.president.toLowerCase() === user.name.toLowerCase())
+    ? clubs.filter(club => club.president && user.name && club.president.toLowerCase() === user.name.toLowerCase())
     : clubs;
 
   // Filtered clubs for faculty (case-insensitive)
   const facultyClubs = user && user.role === 'faculty'
-    ? clubs.filter(club => club.faculty && club.faculty.toLowerCase() === user.name.toLowerCase())
+    ? clubs.filter(club => club.faculty && user.name && club.faculty.toLowerCase() === user.name.toLowerCase())
     : clubs;
 
   if (!user) {
@@ -463,7 +461,7 @@ function App() {
                   <button onClick={() => setShowAddClubForm(true)} style={{ fontSize: '1rem', padding: '8px 18px' }}>Add Club Details</button>
                 </div>
               ) : (
-                <div className="add-club-form">
+            <div className="add-club-form">
               <input
                 type="text"
                 placeholder="New Club Name"
